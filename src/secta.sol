@@ -839,7 +839,7 @@ contract ERC20 is Context, IERC20, Ownable {
 
 
 // SectToken with Governance.
-contract SectToken is ERC20('SectaFi Token', 'SECTA') {
+contract SectToken is ERC20('Secta Finance Governance Token', 'SECTA') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
@@ -871,8 +871,8 @@ contract SectToken is ERC20('SectaFi Token', 'SECTA') {
         bytes32 s
     ) external
     {
-        require(now <= expiry, "SECT::permit: signature expired");
-        require(owner != address(0), "SECT::permit: invalid owner");
+        require(now <= expiry, "SECTA::permit: signature expired");
+        require(owner != address(0), "SECTA::permit: invalid owner");
         uint nonce = nonces[owner];
 
         bytes32 domainSeparator = keccak256(
@@ -904,7 +904,7 @@ contract SectToken is ERC20('SectaFi Token', 'SECTA') {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory == owner, "SECT::permit: invalid signature");
+        require(signatory == owner, "SECTA::permit: invalid signature");
 
         nonces[owner] = nonce + 1;
 
@@ -1024,9 +1024,9 @@ contract SectToken is ERC20('SectaFi Token', 'SECTA') {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "SECT::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "SECT::delegateBySig: invalid nonce");
-        require(now <= expiry, "SECT::delegateBySig: signature expired");
+        require(signatory != address(0), "SECTA::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "SECTA::delegateBySig: invalid nonce");
+        require(now <= expiry, "SECTA::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -1056,7 +1056,7 @@ contract SectToken is ERC20('SectaFi Token', 'SECTA') {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "SECT::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "SECTA::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -1129,7 +1129,7 @@ contract SectToken is ERC20('SectaFi Token', 'SECTA') {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "SECT::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "SECTA::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;
