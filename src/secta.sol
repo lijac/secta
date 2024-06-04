@@ -838,8 +838,8 @@ contract ERC20 is Context, IERC20, Ownable {
 }
 
 
-// SectToken with Governance.
-contract SectToken is ERC20('Secta Finance Governance Token', 'SECTA') {
+// SectaToken with Governance.
+contract SectaToken is ERC20('Secta Finance Governance Token', 'SECTA') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
